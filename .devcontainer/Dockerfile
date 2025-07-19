@@ -15,8 +15,8 @@ RUN apt-get update && \
     curl -fL https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz | tar zx -C /usr/local/bin
 
 # Install openbox for swing gui
-#RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
-     apt-get -y install --no-install-recommends openbox
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
+    apt-get -y install --no-install-recommends openbox
 
 # Set openbox to start automatically
 RUN echo 'openbox-session &' >> ~/.xinitrc

@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // {
+    //   "label": "gotty-dl",
+    //   "type": "shell",
+    //   "command": "curl -fL https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz -o gotty.tar.gz",
+    //   "detail": "download gotty module"
+    // },
+    // {
+    //   "label": "gotty-extract",
+    //   "type": "shell",
+    //   "command": "sudo tar -xzf gotty.tar.gz -C /usr/local/bin",
+    //   "dependsOn": ["gotty-dl"],
+    //   "detail": "extracting in Dockerfile doesn't work for some reason *shrug*"
+    // },
+    {
+      "label": "maven-build-jar",
+      "type": "shell",
+      "command": "mvn clean package",
+      "detail": "erase /target folder and rebuild jar"
+    },
+    {
+      "label": "run-gotty",
+      "type": "shell",
+      "command": "gotty --permit-write java -jar $(ls target/*.jar)",
+      "dependsOn": ["maven-build-jar"],
+      "detail": "If expecting more than 1 jar, use: java -jar $(ls target/*.jar | head -n 1)"
+    }
+  ]
+}
